@@ -1,0 +1,26 @@
+While setting up the kubernetes on the EC2 instance, I was getting below error:
+
+---
+[kubelet-check] It seems like the kubelet isn't running or healthy.
+[kubelet-check] The HTTP call equal to 'curl -sSL http://localhost:10248/healthz' failed with error: Get "http://localhost:10248/healthz": dial tcp 127.0.0.1:10248: connect: connection refused.
+---
+
+Solution:
+
+If you google this issue you will find the solution that this occurs because of the swap which was not the case with me and definately aws instance was not having the swap configured.
+
+So in this particular case docker was using the groupfs which i changed to systemd and thats it volla it got resolved.
+
+Create the file as
+
+[root@k8smaster ~]# vim /etc/docker/daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"]
+}
+[root@k8smaster ~]# systemctl restart docker
+[root@k8smaster ~]# systemctl status docker
+Thats it you problem should be resolved now and you can the kubeadm reset command followed by the kubeadm init command to reinitialise your kubernetes cluster which will work this time.
+
+
+
+
