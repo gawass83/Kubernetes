@@ -1,3 +1,6 @@
+Follow this link for setup: https://www.zekelabs.com/blog/how-to-install-kubernetes-cluster-on-aws-ec2-instances/
+
+
 While setting up the kubernetes on the EC2 instance, I was getting below error:
 
 ---
