@@ -1,3 +1,21 @@
+Link for setup: https://www.radishlogic.com/kubernetes/running-minikube-in-aws-ec2-ubuntu/
+
+ERROR in above link: 
+
+root@ip-172-31-7-217:/home/ubuntu# minikube start --vm-driver=none
+* minikube v1.24.0 on Ubuntu 20.04 (xen/amd64)
+* Using the none driver based on user configuration
+
+X Exiting due to GUEST_MISSING_CONNTRACK: Sorry, Kubernetes 1.22.3 requires conntrack to be installed in root's path
+
+
+Solution: 
+
+sudo apt install conntrack
+Then continue to start your minikube:
+sudo minikube start --vm-driver=none
+
+
 Install kubectl first:
 
 Step 1: curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
